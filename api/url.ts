@@ -1,0 +1,1 @@
+export const URL_BASE = 'https://nutri-app-rho.vercel.app/api/';
