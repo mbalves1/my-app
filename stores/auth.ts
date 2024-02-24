@@ -8,16 +8,23 @@ interface LoginPayload {
   password: string;
 }
 
+interface State {
+  token: string
+}
+
 export const useAuth = defineStore('auth', {
-  state: () => ({
-    user: []
-  }),
+  state: (): State => {
+    return {
+      token: ''
+    }
+  },
   actions: {
     async login(payload: LoginPayload) {
       try {
+        console.log("payload", payload)
         const response = await login(payload)
         const data = await response.json()
-        console.log("data", data)
+        this.token = data?.token;
         return data
       } catch (error) {
         console.error(error)

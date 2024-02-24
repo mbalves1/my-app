@@ -55,7 +55,8 @@ const payload = ref({
 const logIn = async () => {
   try {
     const response = await login(payload.value)
-    console.log('Logged in', response)
+    navigateTo({ path: '/home'})
+    return response
   } catch (error) {
     console.error(error)
   }
