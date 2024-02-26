@@ -20,32 +20,19 @@
         </form>
       </CardContent>
       <CardFooter class="flex px-6 pb-6 w-full">
-        <Button @click="logIn">Login</Button>
+        <Button @click="logIn">
+          <Loader2 v-if="loading" class="w-4 h-4 mr-2 animate-spin" />
+          <span v-else>Login</span>
+        </Button>
       </CardFooter>
     </Card>
   </div>
 </template>
 <script setup lang='ts'>
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '../components/ui/card'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Button } from '@/components/ui/button'
+import { Loader2 } from 'lucide-vue-next'
 
 const { login } = useAuth()
+const loading = ref(false)
 
 const payload = ref({
   email: 'bi@email',
@@ -53,11 +40,14 @@ const payload = ref({
 })
 
 const logIn = async () => {
+  loading.value = true
   try {
     const response = await login(payload.value)
     navigateTo({ path: '/home'})
+    loading.value = false
     return response
   } catch (error) {
+    loading.value = false
     console.error(error)
   }
 }

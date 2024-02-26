@@ -8,6 +8,9 @@ export default defineNuxtConfig({
     '@pinia-plugin-persistedstate/nuxt',
     'nuxt-lucide-icons'
   ],
+  imports: {
+    autoImport: true
+  },
   shadcn: {
     /**
      * Prefix for all the imported component
