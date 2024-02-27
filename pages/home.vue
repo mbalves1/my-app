@@ -6,14 +6,14 @@
         class="flex rounded-md w-10/12 h-[200px] items-center justify-center bg-zinc-100 hover:bg-white hover:border-2 flex-col hover:font-bold cursor-pointer active:bg-green-200"
         @click="getIn(1)"
       >
-        <!-- <Carrot class="w-10 h-10 mr-2"></Carrot> -->
+        <Carrot class="w-10 h-10 mr-2"></Carrot>
         <span class="sm:text-xl mt-2">Ingredientes</span>
       </div>
       <div
         class="flex rounded-md w-10/12 h-[200px] items-center justify-center bg-zinc-100 hover:bg-white hover:border-2 flex-col hover:font-bold cursor-pointer active:bg-green-200"
         @click="getIn(2)"
       >
-        <!-- <UtensilsCrossed class="w-10 h-10 mr-2"></UtensilsCrossed> -->
+        <UtensilsCrossed class="w-10 h-10 mr-2"></UtensilsCrossed>
         <span class="sm:text-xl mt-2">Receitas</span>
       </div>
     </div>
@@ -40,7 +40,7 @@
   </div>
 </template>
 <script setup lang="ts">
-// import { UtensilsCrossed, Carrot } from 'lucide-vue-next'
+import { UtensilsCrossed, Carrot } from 'lucide-vue-next'
 
 // Habilitar depois de resolver o problema do middleware
 // definePageMeta({
