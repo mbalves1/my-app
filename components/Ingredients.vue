@@ -20,10 +20,10 @@
             {{ item.quantityvalue }}
           </TableCell>
           <TableCell class="text-right">
-            <!-- <Trash2 class="font-bold w-3 h-3 text-red-500 cursor-pointer"></Trash2> -->
-            <div @click="remove(item)">
-              delete
-            </div>
+            <Trash2
+              class="font-bold w-3 h-3 text-red-500 cursor-pointer" 
+              @click="remove(item)"
+            ></Trash2>
           </TableCell>
         </TableRow>
       </TableBody>
