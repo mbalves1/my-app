@@ -21,10 +21,10 @@ export const useAuth = defineStore('auth', {
   actions: {
     async login(payload: LoginPayload) {
       try {
-        console.log("payload", payload)
         const response = await login(payload)
         const data = await response.json()
         this.token = data?.token;
+        localStorage.setItem("access", this.token);
         return data
       } catch (error) {
         console.error(error)

@@ -1,8 +1,6 @@
 import { URL_BASE } from './url';
 
 export async function login({ email, password }: { email: string, password: string }): Promise<Response> {
-  // const token = localStorage.getItem("token")
-
   const response =  await fetch(`${URL_BASE}auth/user`, {
     method: 'POST',
     headers: {

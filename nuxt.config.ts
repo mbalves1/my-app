@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   modules: [
     '@nuxtjs/tailwindcss',
     'shadcn-nuxt',
@@ -8,9 +8,6 @@ export default defineNuxtConfig({
     '@pinia-plugin-persistedstate/nuxt',
     'nuxt-lucide-icons'
   ],
-  imports: {
-    autoImport: true
-  },
   shadcn: {
     /**
      * Prefix for all the imported component
@@ -35,8 +32,5 @@ export default defineNuxtConfig({
   },
   pinia: {
     storesDirs: ['./stores/**'],
-  },
-  lucide: {
-    namePrefix: 'Icon'
   },
 })
