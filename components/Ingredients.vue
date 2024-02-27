@@ -5,9 +5,9 @@
       <TableHeader>
         <TableRow>
           <TableHead class="">Nome</TableHead>
-          <TableHead>Tipo</TableHead>
           <TableHead>Carb</TableHead>
-          <TableHead class="text-right">Qdd</TableHead>
+          <TableHead>Qdd</TableHead>
+          <TableHead class="text-right"></TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -15,10 +15,15 @@
           <TableCell class="font-medium">
             {{ item.name }}
           </TableCell>
-          <TableCell>{{ item.type }}</TableCell>
           <TableCell>{{ item.carbvalue }}</TableCell>
-          <TableCell class="text-right">
+          <TableCell>
             {{ item.quantityvalue }}
+          </TableCell>
+          <TableCell class="text-right">
+            <!-- <Trash2 class="font-bold w-3 h-3 text-red-500 cursor-pointer"></Trash2> -->
+            <div @click="remove(item)">
+              delete
+            </div>
           </TableCell>
         </TableRow>
       </TableBody>
@@ -26,9 +31,10 @@
   </div>
 </template>
 <script setup lang="ts">
+import { Trash2 } from 'lucide-vue-next'
 
-const { token } = useAuth()
-const { getIngredients } = useIngredient()
+// const { token } = useAuth()
+const { getIngredients, deleteIngredient, createIngredient } = useIngredient()
 
 interface Item {
   name: string;
@@ -37,10 +43,27 @@ interface Item {
   quantityvalue: number;
 }
 
+const props = defineProps({
+  ingredientProps: {
+    type: Object
+  },
+})
+
+watch(props, async (payload: any) => {
+  try {
+    await save(payload.ingredientProps)
+    await getAll()
+  } catch (error) {
+    console.error(error);
+  }
+})
+
+const token = localStorage.getItem('access')
+
 const data = ref<Item[]>([]);
 
-onMounted(() => {
-  getAll()
+onMounted(async () => {
+  await getAll()
 })
 
 async function getAll() {
@@ -50,6 +73,27 @@ async function getAll() {
     return response
   }
   catch (error) {
+    console.error(error);
+  }
+}
+
+async function save(payload: Item) {
+  try {
+    const response = await createIngredient(token, payload)
+    getAll()
+    return response
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+async function remove(item: any) {
+  try {
+    await deleteIngredient(token, item._id)
+    getAll()
+    return
+  }
+  catch(error) {
     console.error(error);
   }
 }

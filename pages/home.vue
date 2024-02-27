@@ -23,13 +23,16 @@
         @back-view="goBackView"
         @open-modal="openModal"
       ></Header>
-      <component :is="view ? 'Ingredients' : 'Recipes'"></component>
+      <component :is="view ? 'Ingredients' : 'Recipes'" :ingredient-props="ingredient"></component>
     </div>
   </div>
   <div class="index-1 w-full h-[100vh] absolute flex items-center justify-center bg-opacity-50 bg-zinc-100" v-if="openModalIngredients"
   transition name="fade">
     <div class="relative">
-      <ModalAddIngredients @close-modal="close"></ModalAddIngredients>
+      <ModalAddIngredients
+        @close-modal="close"
+        @save-ingredient="save"
+      ></ModalAddIngredients>
     </div>
   </div>
   <div class="index-1 w-full h-[100vh] absolute flex items-center justify-center bg-opacity-50 bg-zinc-100" v-if="openModalRecipes"
@@ -47,10 +50,18 @@ import { UtensilsCrossed, Carrot } from 'lucide-vue-next'
 //   middleware: 'account'
 // })
 
+interface Item {
+  name: string;
+  type: string;
+  carbvalue: number;
+  quantityvalue: number;
+}
+
 const view = ref(false)
 const tabsViewer = ref(false)
 const openModalIngredients = ref(false)
 const openModalRecipes = ref(false)
+const ingredient = ref(null)
 
 const getIn = (viewer: number) => {
   tabsViewer.value = true
@@ -70,6 +81,19 @@ const openModal = (page: string) => {
 function close(event: boolean) {
   openModalIngredients.value = event
   openModalRecipes.value = event
+}
+
+const save = (payload: {
+  name: string;
+  type: string;
+  carbvalue: number;
+  quantityvalue: number;
+}) => {
+  console.log(payload)
+  ingredient.value = payload
+  setTimeout(() => {
+    close()
+  }, 1000) 
 }
 
 </script>

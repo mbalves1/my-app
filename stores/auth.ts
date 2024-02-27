@@ -9,7 +9,7 @@ interface LoginPayload {
 }
 
 interface State {
-  token: string
+  token: string | null
 }
 
 export const useAuth = defineStore('auth', {

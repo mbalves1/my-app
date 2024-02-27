@@ -1,10 +1,20 @@
 import { defineStore } from 'pinia'
 import {
-  getIngredients
+  getIngredients,
+  postIngredient,
+  deleteIngredient
 } from "../api/api-ingredient";
 
 interface State {
-  ingredient: string[]
+  ingredient: Ingredient[]
+}
+
+interface Ingredient {
+  name: String;
+  carbvalue: String;
+  type: String;
+  unity: String;
+  quantityvalue: String;
 }
 
 export const useIngredient = defineStore('ingredients', {
@@ -19,10 +29,29 @@ export const useIngredient = defineStore('ingredients', {
         const response = await getIngredients(token)
         const data = await response.json() 
         this.ingredient = data
+        console.log("this", this.ingredient)
         return data
       } catch (error) {
         console.error(error)
       }
     },
+    async createIngredient(token: string, payload: Ingredient) {
+      try {
+        const response = await postIngredient(token, payload)
+        const data = await response.json() 
+        return data
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async deleteIngredient(token: string, id: any) {      
+      try {
+        const response = await deleteIngredient(token, id)
+        const data = await response.json() 
+        return data
+      } catch (error) {
+        console.error(error)
+      }
+    }
   }
 })
