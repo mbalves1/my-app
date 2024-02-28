@@ -20,10 +20,10 @@
             {{ item.quantityvalue }}
           </TableCell>
           <TableCell class="text-right">
-            <Trash2
-              class="font-bold w-3 h-3 text-red-500 cursor-pointer" 
-              @click="remove(item)"
-            ></Trash2>
+            <Icon
+              name="basil:trash-alt-outline"
+              class="font-bold w-6 h-6 text-red-500 cursor-pointer"
+              @click="remove(item)"></Icon>
           </TableCell>
         </TableRow>
       </TableBody>
@@ -31,7 +31,6 @@
   </div>
 </template>
 <script setup lang="ts">
-import { Trash2 } from 'lucide-vue-next'
 
 // const { token } = useAuth()
 const { getIngredients, deleteIngredient, createIngredient } = useIngredient()

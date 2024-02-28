@@ -52,17 +52,17 @@
     <CardFooter class="flex justify-between px-6 pb-6">
       <Button variant="outline" @click="closeModal">
         Fechar
-        <XCLose></XCLose>
+        <Icon name="solar:close-square-linear" class="w-6 h-6 ml-2"></Icon>
       </Button>
       <Button @click="save">
         Salvar
-        <Send></Send>
+        <Icon name="circum:save-up-2" class="w-6 h-6 ml-2"></Icon>
       </Button>
     </CardFooter>
   </Card>
 </template>
 <script lang="ts" setup>
-import { XClose, Send } from 'lucide-vue-next'
+// import { XCircle, Send } from 'lucide-vue-next'
 
 const emit = defineEmits(['closeModal', 'saveIngredient'])
 

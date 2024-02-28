@@ -21,15 +21,15 @@
       </CardContent>
       <CardFooter class="flex px-6 pb-6 w-full">
         <Button @click="logIn">
-          <Loader2 v-if="loading" class="w-4 h-4 mr-2 animate-spin" />
-          <span v-else>Login</span>
+          <Icon name="line-md:loading-loop" v-if="loading" class="w-4 h-4 mr-2 animate-spin"></Icon>
+          <span>Login</span>
         </Button>
       </CardFooter>
     </Card>
   </div>
 </template>
 <script setup lang='ts'>
-import { Loader2 } from 'lucide-vue-next'
+// import { Loader2 } from 'lucide-vue-next'
 
 definePageMeta({
   layout: 'login'

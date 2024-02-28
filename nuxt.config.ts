@@ -6,7 +6,7 @@ export default defineNuxtConfig({
     'shadcn-nuxt',
     '@pinia/nuxt',
     '@pinia-plugin-persistedstate/nuxt',
-    'nuxt-lucide-icons'
+    'nuxt-icon'
   ],
   shadcn: {
     /**
@@ -32,5 +32,8 @@ export default defineNuxtConfig({
   },
   pinia: {
     storesDirs: ['./stores/**'],
+  },
+  lucide: {
+    autoimport: true,
   },
 })
