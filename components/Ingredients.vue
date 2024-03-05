@@ -15,7 +15,7 @@
           <TableCell class="font-medium">
             {{ item.name }}
           </TableCell>
-          <TableCell>{{ item.carbvalue }}</TableCell>
+          <TableCell>{{ item.carbvalue.$numberDecimal }}</TableCell>
           <TableCell>
             {{ item.quantityvalue }}
           </TableCell>

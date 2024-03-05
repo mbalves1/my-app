@@ -29,7 +29,6 @@ export const useIngredient = defineStore('ingredients', {
         const response = await getIngredients(token)
         const data = await response.json() 
         this.ingredient = data
-        console.log("this", this.ingredient)
         return data
       } catch (error) {
         console.error(error)

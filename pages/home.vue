@@ -31,14 +31,17 @@
     <div class="relative">
       <ModalAddIngredients
         @close-modal="close"
-        @save-ingredient="save"
+        @save-ingredient="saveIngredient"
       ></ModalAddIngredients>
     </div>
   </div>
   <div class="index-1 w-full h-[100vh] absolute flex items-center justify-center bg-opacity-50 bg-zinc-100" v-if="openModalRecipes"
   transition name="fade">
     <div class="relative">
-      <ModalAddRecipes @close-modal="close"></ModalAddRecipes>
+      <ModalAddRecipes
+        @close-modal="close"
+        @save-recipes="saveRecipe"
+      ></ModalAddRecipes>
     </div>
   </div>
 </template>
@@ -62,6 +65,7 @@ const tabsViewer = ref(false)
 const openModalIngredients = ref(false)
 const openModalRecipes = ref(false)
 const ingredient = ref(null)
+const snack = ref(null)
 
 const getIn = (viewer: number) => {
   tabsViewer.value = true
@@ -73,7 +77,6 @@ function goBackView() {
 }
 
 const openModal = (page: string) => {
-  console.log(page)
   if (page === 'Ingredientes') return openModalIngredients.value = true
   if (page === 'Receitas') return openModalRecipes.value = true
 }
@@ -83,7 +86,7 @@ function close(event: boolean) {
   openModalRecipes.value = event
 }
 
-const save = (payload: {
+const saveIngredient = (payload: {
   name: string;
   type: string;
   carbvalue: number;
@@ -96,4 +99,7 @@ const save = (payload: {
   }, 1000) 
 }
 
+const saveRecipe = (payload: any) => {
+  snack.value = payload
+}
 </script>
