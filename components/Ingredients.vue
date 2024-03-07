@@ -1,9 +1,9 @@
 <template>
-  <div class=" h-[100vh]">
+  <div class=" h-[100vh] m-3">
     <Table class="">
       <TableCaption>A list of your recent invoices.</TableCaption>
       <TableHeader>
-        <TableRow>
+        <TableRow class="border-zinc-400">
           <TableHead class="">Nome</TableHead>
           <TableHead>Carb</TableHead>
           <TableHead>Qdd</TableHead>
@@ -11,7 +11,7 @@
         </TableRow>
       </TableHeader>
       <TableBody>
-        <TableRow v-for="(item, ix) in data" :key="ix">
+        <TableRow v-for="(item, ix) in data" :key="ix" class="border-zinc-300">
           <TableCell class="font-medium">
             {{ item.name }}
           </TableCell>
