@@ -29,7 +29,11 @@ export const useSnack = defineStore('snack', {
     },
     async fecthSnack(token: string) {
       try {
-        await getSnack(token)
+        const response = await getSnack(token)
+        const data = await response.json()
+        console.log("data", data);
+        
+        return data
       } catch (error) {
         console.error(error);
       }

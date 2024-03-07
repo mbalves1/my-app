@@ -28,6 +28,7 @@ export async function getSnack(token: string): Promise<Response> {
       'Authorization': `Bearer ${token}`
     }
   })
-
+  console.log("response", response);
+  
   return response
 }
