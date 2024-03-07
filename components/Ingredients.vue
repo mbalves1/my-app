@@ -21,9 +21,14 @@
           </TableCell>
           <TableCell class="text-right">
             <Icon
+              v-if="loadingIndex === ix"
+              name="line-md:loading-loop"
+              class="w-4 h-4 mr-2 animate-spin"></Icon>
+            <Icon
+              v-else
               name="basil:trash-alt-outline"
               class="font-bold w-6 h-6 text-red-500 cursor-pointer"
-              @click="remove(item)"></Icon>
+              @click="remove(item, ix)"></Icon>
           </TableCell>
         </TableRow>
       </TableBody>
@@ -47,6 +52,8 @@ const props = defineProps({
     type: Object
   },
 })
+
+const loadingIndex = ref(null)
 
 watch(props, async (payload: any) => {
   try {
@@ -87,9 +94,11 @@ async function save(payload: Item) {
   }
 }
 
-async function remove(item: any) {
+async function remove(item: any, index: number) {
   try {
+    loadingIndex.value = index
     await deleteIngredient(token, item._id)
+    loadingIndex.value = null
     getAll()
     return
   }
