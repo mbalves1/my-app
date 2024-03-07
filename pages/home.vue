@@ -23,7 +23,7 @@
         @back-view="goBackView"
         @open-modal="openModal"
       ></Header>
-      <component :is="view ? 'Ingredients' : 'Recipes'" :ingredient-props="ingredient"></component>
+      <component :is="view ? 'Ingredients' : 'Recipes'" :ingredient-props="ingredient" @loading-save="loadingSave"></component>
     </div>
   </div>
   <div class="index-1 w-full h-[100vh] absolute flex items-center justify-center bg-opacity-50 bg-zinc-100" v-if="openModalIngredients"
@@ -32,6 +32,7 @@
       <ModalAddIngredients
         @close-modal="close"
         @save-ingredient="saveIngredient"
+        :laoding="loading"
       ></ModalAddIngredients>
     </div>
   </div>
@@ -67,6 +68,8 @@ const openModalRecipes = ref(false)
 const ingredient = ref(null)
 const snack = ref(null)
 
+const loading = ref(false)
+
 const getIn = (viewer: number) => {
   tabsViewer.value = true
   return viewer === 1 ? view.value = true : view.value = false 
@@ -92,11 +95,14 @@ const saveIngredient = (payload: {
   carbvalue: number;
   quantityvalue: number;
 }) => {
-  console.log(payload)
   ingredient.value = payload
   setTimeout(() => {
     close()
   }, 1000) 
+}
+
+const loadingSave = (event: boolean) => {
+  loading.value = event
 }
 
 const saveRecipe = (payload: any) => {

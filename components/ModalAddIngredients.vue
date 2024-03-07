@@ -18,7 +18,7 @@
             <Label for="type">Tipo</Label>
             <Input
               id="type"
-              placeholder="Tipo da refeição"
+              placeholder="Tipo da refeição (ex: Prato, Bebida)"
               v-model="payload.type"
             />
           </div>
@@ -26,7 +26,7 @@
             <Label for="carbvalue">Carb</Label>
             <Input
               id="carbvalue"
-              placeholder="Valores de carbo"
+              placeholder="Valores de carbo (0.123)"
               v-model="payload.carbvalue"
             />
           </div>
@@ -34,7 +34,7 @@
             <Label for="unity">Unidade</Label>
             <Input
               id="unity"
-              placeholder="Unidade utilizada"
+              placeholder="Unidade utilizada (g)"
               v-model="payload.unity"
             />
           </div>
@@ -42,7 +42,7 @@
             <Label for="quantityvalue">Qdd</Label>
             <Input
               id="quantityvalue"
-              placeholder="Quantidade"
+              placeholder="Quantidade (1)"
               v-model="payload.quantityvalue"
             />
           </div>
@@ -56,7 +56,8 @@
       </Button>
       <Button @click="save">
         Salvar
-        <Icon name="circum:save-up-2" class="w-6 h-6 ml-2"></Icon>
+        <Icon name="circum:save-up-2" v-if="!loading" class="w-6 h-6 ml-2"></Icon>
+        <Icon name="line-md:loading-loop" v-if="loading" class="w-4 h-4 mr-2 animate-spin"></Icon>
       </Button>
     </CardFooter>
   </Card>
@@ -65,13 +66,20 @@
 // import { XCircle, Send } from 'lucide-vue-next'
 
 const emit = defineEmits(['closeModal', 'saveIngredient'])
+const loading = ref(false)
+
+const props = defineProps({
+  laoding: {
+    type: Boolean
+  },
+})
 
 const payload = ref({
-  name: 'Maca',
-  type: 'cafe',
-  carbvalue: '12',
-  unity: 'g',
-  quantityvalue: '1234'
+  name: '',
+  type: '',
+  carbvalue: '',
+  unity: '',
+  quantityvalue: ''
 })
 
 const closeModal = () => {
@@ -79,6 +87,8 @@ const closeModal = () => {
 }
 
 const save = () => {
+  loading.value = true
   emit('saveIngredient', payload.value)
+  loading.value = props.laoding
 }
 </script>

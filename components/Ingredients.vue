@@ -31,7 +31,7 @@
   </div>
 </template>
 <script setup lang="ts">
-
+const emit = defineEmits(['loadingSave'])
 // const { token } = useAuth()
 const { getIngredients, deleteIngredient, createIngredient } = useIngredient()
 
@@ -51,6 +51,7 @@ const props = defineProps({
 watch(props, async (payload: any) => {
   try {
     await save(payload.ingredientProps)
+    emit('loadingSave', true)
     await getAll()
   } catch (error) {
     console.error(error);
