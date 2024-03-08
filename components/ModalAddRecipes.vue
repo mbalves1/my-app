@@ -41,20 +41,28 @@
       </Button>
       <Button @click="save">
         Salvar
-        <Icon name="circum:save-up-2" class="w-6 h-6 ml-2"></Icon>
-      </Button>
-
-      <Button @click="update">
-        Recarregar
-        <Icon name="circum:save-up-2" class="w-6 h-6 ml-2"></Icon>
+        <Icon
+          v-if="!loading"
+          name="circum:save-up-2"
+          class="w-6 h-6 ml-2"></Icon>
+        <Icon
+          v-if="loading"
+          name="line-md:loading-loop"
+          class="w-4 h-4 mr-2 animate-spin"></Icon>
       </Button>
     </CardFooter>
   </Card>
 </template>
 <script lang="ts" setup>
-import { Check } from 'lucide-vue-next';
+// import { Check } from 'lucide-vue-next';
 
 const emit = defineEmits(['closeModal', 'saveRecipes'])
+const props = defineProps({
+  loadingProps: {
+    type: Boolean
+  },
+})
+const loading = ref(false)
 
 const { getIngredients } = useIngredient()
 const { createSnack, fecthSnack } = useSnack()
@@ -111,14 +119,10 @@ const save = async () => {
   const payload = {
     ...payloadSnacks.value
   }
+  loading.value = true
   emit('saveRecipes', payload)
-  const response = await createSnack(token, payload)
+  loading.value = props.loadingProps
   const snacks = await fecthSnack(token)
-}
-
-const update = async () => {
-  const snacks = await fecthSnack(token)
-  console.log("response", snacks)
 }
 
 </script>

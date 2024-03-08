@@ -1,7 +1,8 @@
 import { defineStore } from 'pinia'
 import {
   postSnack,
-  getSnack
+  getSnack,
+  deleteSnack
 } from "../api/api-snack";
 
 interface Snack {
@@ -31,11 +32,19 @@ export const useSnack = defineStore('snack', {
       try {
         const response = await getSnack(token)
         const data = await response.json()
-        console.log("data", data);
         
         return data
       } catch (error) {
         console.error(error);
+      }
+    },
+    async removeSnack(token: string, id: string) {      
+      try {
+        const response = await deleteSnack(token, id)
+        const data = await response.json() 
+        return data
+      } catch (error) {
+        console.error(error)
       }
     }
   }
