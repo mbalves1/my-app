@@ -1,17 +1,22 @@
 <template>
   <div class="mx-2">
     <div class="mt-2">
-      <div v-for="(recipe, rx) in data" :key="rx" class="border rounded-xl border-zinc-300 gap-2 mt-2">
+      <div
+        v-for="(recipe, rx) in data"
+        :key="rx"
+        class="border rounded-xl border-zinc-300 gap-2 mt-2 hover:shadow-xl">
         <div class="flex justify-between p-6">
-          <p>{{ recipe.type }}</p>
-          <p>{{ recipe.sum }}</p>
-          <div class="flex">
-            <p>{{ recipe.createdAt }}</p>
-            <Icon
-              name="basil:trash-alt-outline"
-              class="font-bold w-6 h-6 text-red-500 cursor-pointer"
-              @click="remove(recipe)"></Icon>
+          <div>
+            <p class="text-xl">{{ recipe.type }}</p>
+            <div class="text-xs ml-2">
+              <p>{{ formatDate(recipe.createdAt) }}</p>
+            </div>
+            <p class="font-bold">Contagem: {{ recipe.sum }}</p>
           </div>
+          <Icon
+            name="basil:trash-alt-outline"
+            class="font-bold w-6 h-6 text-red-500 cursor-pointer ml-2"
+            @click="remove(recipe)"></Icon>
         </div>
       </div>
     </div>
